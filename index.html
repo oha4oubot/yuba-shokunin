@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f7f4">
+<title>湯葉職人 | YUBA</title>
+<style>
+:root{--ink:#171717;--paper:#f7f7f4;--muted:#777;--line:#d7d7d1;--soft:#ecece6;--good:#292929}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"Noto Sans JP",sans-serif}
+button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid #777;outline-offset:3px}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 38px}
+header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:4px 0 17px;gap:12px}
+.brand{font-size:12px;letter-spacing:.22em;font-weight:800}
+.status{font-size:11px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+h1{font-size:clamp(35px,8vw,58px);letter-spacing:-.07em;line-height:1;margin:29px 0 8px;font-weight:850}
+.sub{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 23px}
+.topline{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:8px}
+.eyebrow{font-size:10px;letter-spacing:.18em;color:var(--muted);font-weight:800}
+.batch{font-size:12px;color:var(--muted)}
+.kitchen{background:#e9e9e3;border:1px solid #d3d3cc;border-radius:3px;padding:16px 14px 14px;position:relative;overflow:hidden}
+.kitchen:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 29px,rgba(0,0,0,.025) 30px);pointer-events:none}
+.pot-area{height:238px;position:relative;display:flex;justify-content:center;align-items:flex-end;padding-bottom:20px}
+.steam{position:absolute;top:22px;left:50%;width:180px;transform:translateX(-50%);height:110px;opacity:.35;pointer-events:none}
+.steam i{position:absolute;bottom:0;width:22px;height:75px;border-left:2px solid #9b9b93;border-radius:50%;filter:blur(1px);animation:steam 2.6s ease-in-out infinite}
+.steam i:nth-child(1){left:25px;animation-delay:-.7s}.steam i:nth-child(2){left:75px;animation-delay:-1.5s}.steam i:nth-child(3){left:125px;animation-delay:-.2s}
+@keyframes steam{0%,100%{transform:translateY(10px) skewX(-8deg);opacity:.15}50%{transform:translateY(-8px) skewX(8deg);opacity:.7}}
+.pot{position:relative;width:min(390px,94%);height:142px;border:5px solid #292929;border-top:8px solid #292929;border-radius:7px 7px 45% 45%/7px 7px 24% 24%;background:#d7d7d0;box-shadow:0 10px 0 rgba(0,0,0,.07);z-index:1}
+.pot:before,.pot:after{content:"";position:absolute;top:20px;width:32px;height:17px;border:4px solid #292929;background:#d7d7d0}.pot:before{left:-34px;border-radius:3px 0 0 3px}.pot:after{right:-34px;border-radius:0 3px 3px 0}
+.milk{position:absolute;inset:5px 5px 10px;border-radius:0 0 48% 48%;background:linear-gradient(#f5f5ef,#cfcfc7);overflow:hidden}
+.milk:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 35%,rgba(255,255,255,.8),transparent 25%),radial-gradient(ellipse at 70% 70%,rgba(255,255,255,.5),transparent 30%)}
+.film{position:absolute;z-index:3;left:8%;width:84%;height:24px;top:12px;border-radius:50% 50% 42% 42%;background:linear-gradient(180deg,#fffef8,#d7d4c8 70%,#bcb9ad);box-shadow:0 2px 4px #7775;opacity:0;transform:scaleX(.88);transition:opacity .2s,transform .25s}
+.film.ready{opacity:1;transform:scaleX(1);animation:shimmer 1.8s ease-in-out infinite}
+@keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.13)}}
+.sheet{position:absolute;z-index:4;left:50%;bottom:112px;width:140px;height:0;transform:translateX(-50%);opacity:0;background:linear-gradient(90deg,#d4d1c5,#fdfcf4 22%,#e8e5d9 55%,#fffdf4 82%,#cbc8bd);border:1px solid #c6c2b6;border-bottom:0;border-radius:48% 48% 12% 12%/8% 8% 5% 5%;box-shadow:0 2px 6px #0001;transition:height .05s linear}
+.sheet.pulling{opacity:1}
+.sheet.perfect{clip-path:polygon(4% 0,96% 0,100% 100%,0 100%)}
+.sheet.wrinkled{filter:contrast(.9);background:repeating-linear-gradient(93deg,#d8d5ca 0 9px,#f8f6eb 10px 15px,#c9c6ba 16px 18px)}
+.sheet.torn:after{content:"";position:absolute;right:10%;bottom:0;width:24%;height:35%;background:#e9e9e3;clip-path:polygon(0 0,100% 20%,75% 55%,100% 100%,0 100%)}
+.pot-label{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:9px;letter-spacing:.2em;color:#777}
+.meter-wrap{margin-top:12px;display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center}
+.meter-label{font-size:11px;font-weight:700;letter-spacing:.08em}
+.meter-number{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.meter{height:5px;background:#d1d1ca;grid-column:1/-1;overflow:hidden}
+.meter span{display:block;height:100%;width:0;background:#222;transition:width .12s}
+.message{min-height:25px;margin:12px 0 0;font-size:12px;color:#555;line-height:1.6}
+.actions{display:grid;grid-template-columns:1fr 1.5fr;gap:9px;margin-top:14px}
+.btn{user-select:none;-webkit-user-select:none;border:1px solid var(--ink);min-height:50px;padding:12px 14px;background:transparent;color:var(--ink);font-weight:750;font-size:13px;letter-spacing:.03em;transition:background .15s,color .15s,opacity .15s}
+.btn.primary{background:var(--ink);color:white}
+.btn:hover:not(:disabled){background:#444;color:#fff}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.instructions{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:22px 0}
+.tip{border-top:1px solid var(--line);padding-top:10px}
+.tip b{display:block;font-size:11px;margin-bottom:5px}.tip span{font-size:11px;color:var(--muted);line-height:1.6}
+.results{display:none;margin-top:18px;border:1px solid var(--ink);padding:17px}
+.results.show{display:block;animation:appear .25s ease}
+@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.result-top{display:flex;justify-content:space-between;align-items:start;gap:10px;border-bottom:1px solid var(--line);padding-bottom:13px}
+.rank{font-size:27px;font-weight:850;letter-spacing:-.06em}.score{text-align:right}.score strong{display:block;font-size:31px;line-height:1;letter-spacing:-.06em}.score small{font-size:10px;color:var(--muted);letter-spacing:.12em}
+.grade-list{display:grid;gap:10px;margin:16px 0}
+.grade-row{display:grid;grid-template-columns:70px 1fr 34px;gap:8px;align-items:center;font-size:11px}
+.grade-row .track{height:4px;background:#e4e4de}.grade-row .track i{display:block;height:100%;background:#222}
+.grade-row em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
+.result-note{font-size:12px;line-height:1.7;color:#555;margin:0 0 14px}
+.result-actions{display:flex;gap:8px}.result-actions .btn{flex:1;min-height:44px}
+.history{margin-top:22px}
+.history-head{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.15em;font-weight:800;border-bottom:1px solid var(--line);padding-bottom:9px}
+.history-list{display:grid;gap:0}
+.history-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}
+.history-item span:last-child{font-weight:800;font-variant-numeric:tabular-nums}
+footer{margin-top:28px;color:#999;font-size:10px;line-height:1.7;text-align:center;letter-spacing:.04em}
+@media(max-width:480px){.wrap{padding:18px 14px 30px}.pot-area{height:220px}.pot{height:130px}.sheet{bottom:105px}.instructions{gap:7px}.tip span{font-size:10px}.actions{grid-template-columns:1fr 1.3fr}.btn{padding:11px 8px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="brand">YUBA / CRAFT</div><div class="status">ONE SHEET CHALLENGE</div></header>
+  <h1>湯葉職人<span style="font-size:.38em;letter-spacing:.02em;vertical-align:top;margin-left:8px">#01</span></h1>
+  <p class="sub">一枚に、技術のすべてを。<br>膜を見極め、静かに引き上げろ。</p>
+
+  <div class="topline"><div class="eyebrow">THE KITCHEN</div><div class="batch" id="batch">仕込み 00</div></div>
+  <section class="kitchen" aria-label="湯葉づくりエリア">
+    <div class="pot-area">
+      <div class="steam"><i></i><i></i><i></i></div>
+      <div class="sheet" id="sheet"></div>
+      <div class="pot"><div class="milk"></div><div class="film" id="film"></div></div>
+      <div class="pot-label">SOY MILK / 82°C</div>
+    </div>
+    <div class="meter-wrap">
+      <div class="meter-label" id="meterLabel">膜の形成</div><div class="meter-number" id="meterNum">待機中</div>
+      <div class="meter"><span id="meterBar"></span></div>
+    </div>
+    <p class="message" id="message" aria-live="polite">「仕込み開始」を押して、豆乳の表面を観察しよう。</p>
+  </section>
+
+  <div class="actions">
+    <button class="btn" id="startBtn">仕込み開始</button>
+    <button class="btn primary" id="pullBtn" disabled>長押しで引き上げる</button>
+  </div>
+
+  <div class="instructions">
+    <div class="tip"><b>01 / 見極め</b><span>膜が張った瞬間を逃さない。待ちすぎても品質は落ちる。</span></div>
+    <div class="tip"><b>02 / 引き上げ</b><span>ボタンを押し続けて、一定の速度で引き上げる。</span></div>
+    <div class="tip"><b>03 / 審査</b><span>タイミング・速度・厚み・形を容赦なく採点。</span></div>
+  </div>
+
+  <section class="results" id="results" aria-live="polite">
+    <div class="result-top"><div><div class="eyebrow">INSPECTION RESULT</div><div class="rank" id="rank">上出来</div></div><div class="score"><strong id="score">0</strong><small> / 100 POINTS</small></div></div>
+    <div class="grade-list" id="gradeList"></div>
+    <p class="result-note" id="resultNote"></p>
+    <div class="result-actions"><button class="btn" id="againBtn">もう一枚作る</button><button class="btn primary" id="shareBtn">結果をコピー</button></div>
+  </section>
+
+  <section class="history">
+    <div class="history-head"><span>職人の記録</span><span id="best">最高  --</span></div>
+    <div class="history-list" id="historyList"><div class="history-item"><span>まだ記録はありません</span><span>--</span></div></div>
+  </section>
+  <footer>YUBA / CRAFT<br>※ゲーム内の湯葉づくりを再現したフィクションです。実際の調理温度・手順とは異なります。</footer>
+</div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const startBtn=$('startBtn'), pullBtn=$('pullBtn'), film=$('film'), sheet=$('sheet');
+  const message=$('message'), meterLabel=$('meterLabel'), meterNum=$('meterNum'), meterBar=$('meterBar');
+  const results=$('results'), historyList=$('historyList'), bestEl=$('best');
+  let phase='idle', batch=0, formingStart=0, readyAt=0, formDuration=0, raf=0, pullStart=0, pullTimer=0, ageTimer=0, sheetHeight=0;
+  let records=[];
+  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+  const setMeter=(label,num,pct)=>{meterLabel.textContent=label;meterNum.textContent=num;meterBar.style.width=clamp(pct,0,100)+'%';};
+  const say=t=>message.textContent=t;
+  const resetSheet=()=>{sheet.className='sheet';sheet.style.height='0px';sheet.style.width='140px';};
+  function startBatch(){
+    cancelAnimationFrame(raf);clearInterval(ageTimer);clearInterval(pullTimer);
+    batch++; phase='forming'; formingStart=performance.now(); formDuration=4200+Math.random()*2800;
+    film.classList.remove('ready');resetSheet();results.classList.remove('show');
+    $('batch').textContent='仕込み '+String(batch).padStart(2,'0');
+    startBtn.disabled=true;startBtn.textContent='仕込み中…';pullBtn.disabled=true;
+    say('表面が静まるのを待つ。泡が消え、小さな膜が現れる……');
+    setMeter('膜の形成','加熱中',0);
+    const tick=now=>{
+      if(phase!=='forming')return;
+      const p=clamp((now-formingStart)/formDuration*100,0,100);
+      setMeter('膜の形成',Math.floor(p)+'%',p);
+      if(p>=100){phase='ready';readyAt=performance.now();film.classList.add('ready');pullBtn.disabled=false;startBtn.textContent='仕込み完了';say('膜が張った！ 今や。長押しで、一定の速度で引き上げよう。');setMeter('膜の状態','引き上げ可能',100);ageTimer=setInterval(updateAge,100);return;}
+      raf=requestAnimationFrame(tick);
+    };
+    raf=requestAnimationFrame(tick);
+  }
+  function updateAge(){
+    if(phase!=='ready')return;
+    const age=(performance.now()-readyAt)/1000;
+    const quality=clamp(100-age*7,0,100);
+    setMeter('膜の状態',age<1?'張りたて':age<4?'良好':age<7?'乾燥注意':'限界',quality);
+    if(age>9){phase='spoiled';clearInterval(ageTimer);film.classList.remove('ready');pullBtn.disabled=true;startBtn.disabled=false;startBtn.textContent='もう一度仕込む';say('遅すぎた……膜が乾いてしまった。今回は失敗。');meterNum.textContent='失敗';}
+  }
+  function beginPull(e){
+    if(phase!=='ready')return;
+    e.preventDefault();phase='pulling';clearInterval(ageTimer);pullStart=performance.now();sheetHeight=0;
+    film.classList.remove('ready');sheet.className='sheet pulling';pullBtn.textContent='引き上げ中… 離して止める';startBtn.disabled=true;
+    say('力を一定に保って……狙いの高さで指を離す。');
+    try{pullBtn.setPointerCapture(e.pointerId)}catch(_){}
+    pullTimer=setInterval(()=>{
+      if(phase!=='pulling')return;
+      const duration=performance.now()-pullStart;
+      sheetHeight=clamp(duration*.105,0,145);
+      sheet.style.height=sheetHeight+'px';
+      sheet.style.width=(140+Math.min(duration*.012,28))+'px';
+      setMeter('引き上げ高さ',Math.round(sheetHeight)+' mm',sheetHeight/145*100);
+      if(duration>1800)finishPull();
+    },25);
+  }
+  function endPull(e){if(phase==='pulling'){e.preventDefault();finishPull();}}
+  function finishPull(){
+    if(phase!=='pulling')return;
+    clearInterval(pullTimer);
+    const duration=performance.now()-pullStart;
+    phase='done';pullBtn.disabled=true;startBtn.disabled=false;startBtn.textContent='次の一枚を仕込む';pullBtn.textContent='引き上げ完了';
+    const age=(pullStart-readyAt)/1000;
+    const timing=clamp(100-Math.abs(age-0.65)*14,0,100); // pull early after formation
+    const speed=clamp(100-Math.abs(duration-950)*.095,0,100);
+    const thickness=clamp(100-Math.abs(sheetHeight-100)*1.4,0,100);
+    const shape=clamp(100-Math.abs(duration-950)*.045-Math.max(0,age-2)*6,0,100);
+    const crackChance=(timing<45||speed<38||sheetHeight<35)?0.82:0.15;
+    const torn=Math.random()<crackChance;
+    const wrinkle=Math.random()<(age>2.5?.72:.18)||speed<55;
+    if(torn){sheet.classList.add('torn');}
+    if(wrinkle){sheet.classList.add('wrinkled');}
+    const aesthetics=clamp(100-(torn?42:0)-(wrinkle?22:0)-Math.abs(age-.65)*8,0,100);
+    const total=Math.round(timing*.28+speed*.27+thickness*.2+shape*.15+aesthetics*.1);
+    let rank,note;
+    if(total>=96&&!torn&&!wrinkle){rank='神業';note='息をのむ一枚。薄さ、張り、輪郭まで隙がない。審査員も黙る完成度。';}
+    else if(total>=86&&!torn){rank='極上';note='見事な引き上げ。わずかな揺らぎはあるが、職人技と呼べる仕上がり。';}
+    else if(total>=70){rank='上出来';note='十分に美しい一枚。ただし、最高評価にはタイミングと均一さがもう一歩。';}
+    else if(total>=50){rank='並';note='湯葉にはなった。でも膜の見極めか、引き上げ速度に粗さが残る。';}
+    else {rank='修業中';note='膜を傷めてしまった。焦らず観察して、張りたてを狙おう。';}
+    if(torn&&total>=70){rank='惜しい';note='点数は悪くないが、端が破れている。見た目の審査は甘くない。';}
+    $('rank').textContent=rank;$('score').textContent=total;
+    const grades=[['見極め',timing],['引き上げ速度',speed],['厚み',thickness],['形の均一さ',shape],['美しさ',aesthetics]];
+    $('gradeList').innerHTML=grades.map(([n,v])=>`<div class="grade-row"><span>${n}</span><span class="track"><i style="width:${Math.round(v)}%"></i></span><em>${Math.round(v)}</em></div>`).join('');
+    $('resultNote').textContent=note;
+    results.classList.add('show');setMeter('品質判定',rank,total);
+    records.unshift({rank,total,batch});records=records.slice(0,5);renderHistory();
+    say(torn?'引き上げ完了。端が裂けた……審査は厳しい。':wrinkle?'引き上げ完了。表面にしわが残った。':'引き上げ完了。仕上がりを審査中。');
+  }
+  function renderHistory(){
+    const best=Math.max(...records.map(r=>r.total));bestEl.textContent='最高 '+String(best).padStart(2,'0');
+    historyList.innerHTML=records.map(r=>`<div class="history-item"><span>${String(r.batch).padStart(2,'0')}　${r.rank}</span><span>${r.total} pt</span></div>`).join('');
+  }
+  startBtn.addEventListener('click',startBatch);
+  pullBtn.addEventListener('pointerdown',beginPull);
+  pullBtn.addEventListener('pointerup',endPull);
+  pullBtn.addEventListener('pointercancel',endPull);
+  pullBtn.addEventListener('lostpointercapture',()=>{if(phase==='pulling')finishPull()});
+  $('againBtn').addEventListener('click',startBatch);
+  $('shareBtn').addEventListener('click',async()=>{
+    const text=`湯葉職人｜${$('rank').textContent} ${$('score').textContent}点\n一枚の湯葉に、技術のすべてを。`;
+    try{await navigator.clipboard.writeText(text);$('shareBtn').textContent='コピーしました！';setTimeout(()=>$('shareBtn').textContent='結果をコピー',1600);}
+    catch(_){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();$('shareBtn').textContent='コピーしました！';}
+  });
+})();
+</script>
+</body>
+</html>
